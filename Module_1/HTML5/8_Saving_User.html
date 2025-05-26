@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Preferences</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f4f4f4;
+    }
+
+    label, select, button {
+      display: block;
+      margin: 15px 0;
+    }
+
+    select, button {
+      padding: 10px;
+      font-size: 1em;
+    }
+
+    #status {
+      margin-top: 10px;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Select Your Preferred Event Type</h2>
+
+  <label for="eventType">Event Type:</label>
+  <select id="eventType" onchange="savePreference()">
+    <option value="">-- Choose an Event --</option>
+    <option value="Music">Music Festival</option>
+    <option value="Art">Art Exhibition</option>
+    <option value="Food">Food Fair</option>
+    <option value="Workshop">Workshop</option>
+  </select>
+
+  <button onclick="clearPreferences()">Clear Preferences</button>
+
+  <div id="status"></div>
+
+  <script>
+    // Load preference on page load
+    window.onload = function () {
+      const savedType = localStorage.getItem("preferredEvent");
+      if (savedType) {
+        document.getElementById("eventType").value = savedType;
+        document.getElementById("status").textContent = `Loaded saved preference: ${savedType}`;
+      }
+    };
+
+    // Save selection to localStorage
+    function savePreference() {
+      const selected = document.getElementById("eventType").value;
+      if (selected) {
+        localStorage.setItem("preferredEvent", selected);
+        sessionStorage.setItem("tempSelection", selected);
+        document.getElementById("status").textContent = `Saved preference: ${selected}`;
+      }
+    }
+
+    // Clear both localStorage and sessionStorage
+    function clearPreferences() {
+      localStorage.removeItem("preferredEvent");
+      sessionStorage.clear();
+      document.getElementById("eventType").value = "";
+      document.getElementById("status").textContent = "Preferences cleared.";
+    }
+  </script>
+
+</body>
+</html>
