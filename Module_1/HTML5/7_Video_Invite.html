@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Promo Video</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f8f8;
+      padding: 20px;
+    }
+
+    video {
+      display: block;
+      margin: 20px auto;
+      max-width: 100%;
+      border: 2px solid #333;
+      border-radius: 8px;
+    }
+
+    #videoMessage {
+      text-align: center;
+      font-weight: bold;
+      color: green;
+      margin-top: 10px;
+    }
+
+    form {
+      margin-top: 40px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label, input {
+      display: block;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    input {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2 style="text-align:center;">You're Invited!</h2>
+
+  <video id="promoVideo" controls oncanplay="showVideoReadyMessage()">
+    <source src="event-promo.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div id="videoMessage"></div>
+
+  <form id="registrationForm">
+    <h3>Register Your Interest</h3>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Enter your name">
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" placeholder="Enter your email">
+  </form>
+
+  <script>
+    function showVideoReadyMessage() {
+      document.getElementById("videoMessage").textContent = "Video ready to play";
+    }
+
+    window.onbeforeunload = function(event) {
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      if (name || email) {
+        return "You have unsaved changes. Are you sure you want to leave?";
+      }
+    };
+  </script>
+
+</body>
+</html>
